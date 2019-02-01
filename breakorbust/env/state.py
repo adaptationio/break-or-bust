@@ -28,9 +28,8 @@ class BustaBitSim():
         self.state = self.state_full[start:end]
         return self.state
 
-    def get_price(self):
-        self.state_current = self.state[-1:]
-        self.price = self.state_current[0][0]
+    def get_state(self):
+        self.state_current = self.state[-1]
     
     def get_diff(self):
         self.state_current = self.state[-1:]
@@ -38,7 +37,7 @@ class BustaBitSim():
 
     def step(self, action):
         self.count += 1
-        self.player.action(self.price, action)
+        self.player.action(self.state_current, action)
         self.make_current_state(self.count)
         self.reward = 0
         #if self.count == 1001:
@@ -81,15 +80,4 @@ class BustaBitSim():
         else:
             return False 
 
-    def difference(self, state):
-        new_state = []
-        r = 1440
-        for i in range(1440):
-            before = state[i][0]
-            b = i+1
-            after = state[b][0]
-            diff = after - before
-        
-            new_state.append([after, diff])
-        return new_state
 
