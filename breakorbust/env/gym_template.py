@@ -7,7 +7,7 @@ from gym.utils import seeding
 #env = WhatIsTheColor()
 
 import numpy as np
-from .env import Template
+from ..env import BustaBitSim
 
 
 class Template_Gym(gym.Env):
@@ -17,7 +17,7 @@ class Template_Gym(gym.Env):
     #Define Actions
     ACTION = [0,1]
 
-    def __init__(self, env=Template()):
+    def __init__(self, env=BustaBitSim()):
         self.env = env
         self.viewer = None
         self.info = None

@@ -12,13 +12,6 @@ class DataTransforms():
     def __init__(self):
         self.love = True
     
-
-    def data_converted(self, data):
-        data_converted  = []
-        for i in data:
-            data_converted.append([i['mid']['c'], i['mid']['h'], i['mid']['l'], i['mid']['o']])
-            #data_converted.append([i['volume'], i['time'],i['mid']['c'], i['mid']['h'], i['mid']['l'], i['mid']['o']])
-        return data_converted
     
     def jsontolist(self, path):
         with open(path) as f:

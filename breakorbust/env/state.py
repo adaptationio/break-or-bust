@@ -1,7 +1,7 @@
 import numpy as np
 #from utilities import DataGrabber
 import torch
-#from .player import Player
+from ..player import Player
 from ..common import DataGrabber
 import numpy
 import random
@@ -9,7 +9,7 @@ import random
 class BustaBitSim():
     def __init__(self):
         self.love = 14
-        #self.player = Player()
+        self.player = Player()
         self.actions = [1,2,3,4]
         self.data_grabber = DataGrabber()
         self.state = None
@@ -20,11 +20,7 @@ class BustaBitSim():
         self.load = True
     
     def make_episode(self):
-        if self.load == True:
-            self.state_full = self.data_grabber.load_state_2()
-        else:
-            self.state_full = self.data_grabber.process_to_array()
-
+        self.state_full = np.load('data/game10000000.npy')
 
     def make_current_state(self, count):
         start = (0+count)
@@ -41,9 +37,7 @@ class BustaBitSim():
         self.diff = self.state_current[0][1]
 
     def step(self, action):
-        
         self.count += 1
-        
         self.player.action(self.price, action)
         self.make_current_state(self.count)
         self.reward = 0

@@ -4,21 +4,14 @@ class Indicators():
     def __init__(self):
         pass
     
-    def average_diff(self, state):
-    
-        new_state = []
-        for i in range(len(state)):
-            new_state.append(state[i][0])
-        new_state = np.mean(new_state)
-        return new_state
+    def mean(self, state):
+        m = np.mean(state)
+        return m
 
 
-    def median_diff(self, state):
-        new_state = []
-        for i in range(len(state)):
-            new_state.append(state[i][0])
-        new_state = np.median(new_state)
-        return new_state
+    def median(self, state):
+        m = np.median(state)
+        return m
     
     def atr(self, state):
         stateatr = []
@@ -30,10 +23,15 @@ class Indicators():
         atr = highatr - lowatr
         return atr  
     
-    def average_vol(self, state):
+    def bandr(self, state):
     
-        new_state = []
-        for i in range(len(state)):
-            new_state.append(state[i][4])
-        new_state = np.mean(new_state)
-        return new_state
+        black = []
+        red = []
+        for i in state:
+            if i >= 2:
+                black.append(i)
+            else:
+                red.append(i)
+        blackper = len(black) / len(state)
+        redper = len(red) / len(state)
+        return blackper, redper
