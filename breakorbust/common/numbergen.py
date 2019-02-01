@@ -21,10 +21,10 @@ class NumberGen():
             else:
                 b = 4503599627370496 # Javascript Original | Math.pow(2,52);
                 number = math.floor((100 * b - intversion) / (b - intversion)) / 100
-            print(number) ### PLEASE PLEASE if doing bigger tests comment this out! 20x speed increase
+            #print(number) ### PLEASE PLEASE if doing bigger tests comment this out! 20x speed increase
             game_array.append(number)
-            if save:
-                np.save('game'+str(games)+'.npy', game_array)
+        if save:
+            np.save('data/game'+str(games)+'.npy', game_array)
         return game_array
 
     def gen(self):
@@ -39,6 +39,9 @@ class NumberGen():
         return number
 
 
+test = NumberGen()
+
+number = test.to_array(100000000)
 
 
 
