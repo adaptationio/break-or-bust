@@ -3,6 +3,7 @@ import numpy as np
 import torch
 from ..player import Player
 from ..common import DataGrabber
+from ..common import Indicators
 import numpy
 import random
 #from ..common import DataGrabber
@@ -18,6 +19,8 @@ class BustaBitSim():
         self.count = 0
         self.diff = 0
         self.load = True
+        self.eval = False
+        self.bet_value = 2
     
     def make_episode(self):
         self.state_full = np.load('data/game10000000.npy')
@@ -30,16 +33,17 @@ class BustaBitSim():
 
     def get_state(self):
         self.state_current = self.state[-1]
+        return self.state_current
 
     def step(self, action):
         self.count += 1
         self.player.action(self.state_current, action)
         self.make_current_state(self.count)
-        reward = 0
-        #if self.count == 1001:
-            #print(self.reward)
         state = self.state_maker()
+        reward = self.reward(self.get_state, self.bet_value)
         done = self.done(self.count)
+        if done:
+            self.render()
         
         return state, reward, done
 
@@ -47,7 +51,10 @@ class BustaBitSim():
     def reset(self):
         self.count = 0
         self.make_episode()
-        self.rand = np.random.random_integers(len(self.state_full / 10 * 9))
+        if self.eval:
+            self.rand = np.random.random_integers(len(self.state_full / 10 * 9), len(self.state_full))
+        else:
+            self.rand = np.random.random_integers(len(self.state_full / 10 * 9))
         self.state = self.make_current_state(self.count)
         state = self.state_maker()
         return state
@@ -57,16 +64,23 @@ class BustaBitSim():
 
 
     def state_maker(self):
-        #user = self.player.details(self.price)
-        #market = self.state_over_time(self.state)
+        user = self.player.details(self.count)
+        state_details = self.state_details(self.state)
         count = np.array([self.count])
-        state = self.data_grabber.flatten(market, user, count)
+        state = self.data_grabber.flatten(state_details, user, count)
 
         return state
 
-    def reward(self):
+    def reward(self, state, bet_value):
+        if self.player.bet == True:
+            if bet_value >= state:
+                reward = 1
+            else:
+                reward = -1
+        if self.player.bet == False:
+            reward = 0
 
-        return self.player.reward
+        return reward
     
     def done(self, count):
         if count == 10000:
@@ -74,5 +88,20 @@ class BustaBitSim():
             return True
         else:
             return False 
+
+    def state_details(self, state):
+        ind = Indicators()
+        details = []
+        mean = ind.mean(state)
+        median = ind.mean(state)
+        black, red = ind.bandr(state)
+        details.append([mean, median, black, red])
+        return details
+         
+
+         
+
+         
+
 
 

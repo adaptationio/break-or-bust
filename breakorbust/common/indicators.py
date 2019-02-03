@@ -14,12 +14,8 @@ class Indicators():
         return m
     
     def atr(self, state):
-        stateatr = []
-        for i in range(len(state)):
-            stateatr.append(state[i][1])
-            stateatr.append(state[i][2])
-        highatr = max(stateatr)
-        lowatr = min(stateatr)
+        highatr = max(state)
+        lowatr = min(state)
         atr = highatr - lowatr
         return atr  
     
