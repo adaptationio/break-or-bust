@@ -23,34 +23,31 @@ class BustaBitSim():
         self.state_full = np.load('data/game10000000.npy')
 
     def make_current_state(self, count):
-        start = (0+count)
-        end = (1001+count)
+        start = (0+count+self.rand)
+        end = (1001+count+self.rand)
         self.state = self.state_full[start:end]
         return self.state
 
     def get_state(self):
         self.state_current = self.state[-1]
-    
-    def get_diff(self):
-        self.state_current = self.state[-1:]
-        self.diff = self.state_current[0][1]
 
     def step(self, action):
         self.count += 1
         self.player.action(self.state_current, action)
         self.make_current_state(self.count)
-        self.reward = 0
+        reward = 0
         #if self.count == 1001:
             #print(self.reward)
         state = self.state_maker()
         done = self.done(self.count)
         
-        return state, self.reward, done
+        return state, reward, done
 
 
     def reset(self):
         self.count = 0
         self.make_episode()
+        self.rand = np.random.random_integers(len(self.state_full / 10 * 9))
         self.state = self.make_current_state(self.count)
         state = self.state_maker()
         return state
@@ -61,15 +58,13 @@ class BustaBitSim():
 
     def state_maker(self):
         #user = self.player.details(self.price)
-        
         #market = self.state_over_time(self.state)
-        
         count = np.array([self.count])
         state = self.data_grabber.flatten(market, user, count)
 
         return state
 
-    def reward2(self):
+    def reward(self):
 
         return self.player.reward
     
