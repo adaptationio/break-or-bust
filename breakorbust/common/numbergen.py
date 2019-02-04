@@ -39,9 +39,9 @@ class NumberGen():
         return number
 
 
-test = NumberGen()
+#test = NumberGen()
 
-number = test.to_array(100000000)
+#number = test.to_array(100000000)
 
 
 

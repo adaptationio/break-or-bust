@@ -2,7 +2,7 @@
 
 #sys.path.append('..')  
 import numpy as np
-from ..common import DataGrabber
+from ..common import DataTransforms
 #from utilities import DataGrabber
 import torch
 import numpy

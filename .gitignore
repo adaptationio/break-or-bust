@@ -1,2 +1,11 @@
 data/game10000000.npy
 data/game100000000.npy
+breakorbust/__pycache__/__init__.cpython-35.pyc
+breakorbust/__pycache__/__init__.cpython-36.pyc
+breakorbust/agents/__pycache__/__init__.cpython-35.pyc
+breakorbust/agents/__pycache__/__init__.cpython-36.pyc
+breakorbust/api/__pycache__/__init__.cpython-36.pyc
+breakorbust/common/__pycache__/__init__.cpython-36.pyc
+breakorbust/agents/__pycache__/ppo_agent_sb.cpython-35.pyc
+breakorbust/agents/__pycache__/ppo_agent_sb.cpython-36.pyc
+breakorbust/common/__pycache__/numbergen.cpython-36.pyc

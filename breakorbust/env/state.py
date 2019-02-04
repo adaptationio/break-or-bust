@@ -1,8 +1,8 @@
 import numpy as np
 #from utilities import DataGrabber
 import torch
-from ..player import Player
-from ..common import DataGrabber
+from .player import Player
+from ..common import DataTransforms
 from ..common import Indicators
 import numpy
 import random
@@ -12,7 +12,7 @@ class BustaBitSim():
         self.love = 14
         self.player = Player()
         self.actions = [1,2,3,4]
-        self.data_grabber = DataGrabber()
+        self.data_grabber = DataTransforms()
         self.state = None
         self.state_full = None
         self.state_current = None
@@ -41,6 +41,7 @@ class BustaBitSim():
         self.make_current_state(self.count)
         state = self.state_maker()
         reward = self.reward(self.get_state, self.bet_value)
+        self.player.balance += reward
         done = self.done(self.count)
         if done:
             self.render()
@@ -60,7 +61,7 @@ class BustaBitSim():
         return state
 
     def render(self):
-        print('test')
+        print(self.player.balance)
 
 
     def state_maker(self):
@@ -79,6 +80,7 @@ class BustaBitSim():
                 reward = -1
         if self.player.bet == False:
             reward = 0
+    
 
         return reward
     
