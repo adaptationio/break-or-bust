@@ -13,7 +13,8 @@ from stable_baselines.common.vec_env import DummyVecEnv, SubprocVecEnv,VecNormal
 from stable_baselines.common import set_global_seeds
 from stable_baselines import ACKTR, PPO2
 from stable_baselines.deepq import DQN
-
+from ..env import Template_Gym
+from ..agents.policy import *
 
 timestamp = datetime.datetime.now().strftime('%y%m%d%H%M%S')
 
@@ -42,7 +43,7 @@ class PPO2_SB():
 
     def train(self, game, state, num_e=1, n_timesteps=1000000, save='./default'):
         env_id = "default"
-        num_e = 16  # Number of processes to use
+        num_e = 1  # Number of processes to use
         # Create the vectorized environment
         #env = DummyVecEnv([lambda: env])
 
@@ -71,7 +72,11 @@ class PPO2_SB():
         :param num_steps: (int) number of timesteps to evaluate it
         :return: (float) Mean reward
         """
-        self.create_envs(num_env)
+        env_id = "default"
+        num_e = 1
+        self.env = SubprocVecEnv([self.make_env(env_id, i) for i in range(num_e)])
+        self.model = PPO2.load("default", self.env, policy=CustomPolicy, tensorboard_log="./ppocnn/" )
+        
 
         episode_rewards = [[0.0] for _ in range(self.env.num_envs)]
         obs = self.env.reset()
@@ -90,7 +95,7 @@ class PPO2_SB():
 
         mean_rewards =  [0.0 for _ in range(self.env.num_envs)]
         n_episodes = 0
-        for i in range(self.seenv.num_envs):
+        for i in range(self.env.num_envs):
             mean_rewards[i] = np.mean(episode_rewards[i])     
             n_episodes += len(episode_rewards[i])   
 
@@ -99,4 +104,5 @@ class PPO2_SB():
         print("Mean reward:", mean_reward, "Num episodes:", n_episodes)
 
         return mean_reward
+
         
