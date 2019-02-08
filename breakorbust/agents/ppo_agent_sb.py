@@ -41,7 +41,7 @@ class PPO2_SB():
         return _init
     
 
-    def train(self, game, state, num_e=1, n_timesteps=1000000, save='./default'):
+    def train(self, num_e=1, n_timesteps=1000000, save='./default'):
         env_id = "default"
         num_e = 1  # Number of processes to use
         # Create the vectorized environment
@@ -60,7 +60,7 @@ class PPO2_SB():
                       #cliprange=lambda _: 0.2,
                       #verbose=1,
                       #tensorboard_log="./breakorbust")
-        self.model = PPO2(CustomPolicy, env=SubprocVecEnv(self.env_fns), verbose=1, learning_rate=1e-5, tensorboard_log="default" )
+        self.model = PPO2(CustomPolicy, env=self.env, verbose=1, learning_rate=1e-5, tensorboard_log=save )
         self.model.learn(n_timesteps)
         self.model.save(save)
     
