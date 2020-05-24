@@ -18,11 +18,11 @@ class DataTransforms():
             data = json.load(f)
         return data
 
-    def flatten(self, u, m, c):
+    def flatten(self, u, m ):
         u = np.concatenate((u), axis=None)
         m = np.concatenate((m), axis=None)
-        c = np.concatenate((c), axis=None)
-        flattened = np.concatenate((m, u, c), axis=None)
+        #c = np.concatenate((c), axis=None)
+        flattened = np.concatenate((m, u), axis=None)
 
         #k = self.data_grabber.flatten(market_details, player_details)
         return flattened

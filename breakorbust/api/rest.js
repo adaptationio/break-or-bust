@@ -29,7 +29,7 @@ xhr.send(null);
 
 
 // Post a user
-var url = "http://localhost:8080/api/v1/users";
+var url = "https://localhost:5000/predict";
 
 var data = {};
 data.firstname = "John";

@@ -24,19 +24,19 @@ class Template_Gym(gym.Env):
         self.reward = None
         self.done = False
         self.state = None
-        self.action_dim = 2
+        self.action_dim = 4
         self.state_dim = 72
         self.num_envs = 1
         self.num_envs_per_sub_batch = 1
-
+        
 
         # forward or backward in each dimension
-        self.action_space = spaces.Discrete(2)
+        self.action_space = spaces.Discrete(self.action_dim)
 
         # observation is the x, y coordinate of the grid
         #low = np.zeros(0, dtype=int)
         #high =  np.array(1, dtype=int) - np.ones(len(self.maze_size), dtype=int)
-        self.observation_space = spaces.Box(low=-1000, high=1000, shape=(72,))
+        self.observation_space = spaces.Box(low=-1000, high=1000, shape=(5,))
         #print("obs")
         #print (self.observation_space)
 

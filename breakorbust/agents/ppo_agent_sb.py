@@ -41,13 +41,15 @@ class PPO2_SB():
         return _init
     
 
-    def train(self, num_e=1, n_timesteps=1000000, save='./default'):
+    def train(self, num_e=1, n_timesteps=1000000, save='saves/agent4'):
         env_id = "default"
         num_e = 1  # Number of processes to use
         # Create the vectorized environment
         #env = DummyVecEnv([lambda: env])
+        
 
         self.env = SubprocVecEnv([self.make_env(env_id, i) for i in range(num_e)])
+        self.env = VecNormalize(self.env, norm_obs=True, norm_reward=True)
         #self.model = PPO2(policy=CnnPolicy,
                       #env=SubprocVecEnv(self.env_fns),
                       #n_steps=8192,
@@ -60,9 +62,10 @@ class PPO2_SB():
                       #cliprange=lambda _: 0.2,
                       #verbose=1,
                       #tensorboard_log="./breakorbust")
-        self.model = PPO2(CustomPolicy, env=self.env, verbose=1, learning_rate=1e-5, tensorboard_log=save )
-        self.model.learn(n_timesteps)
-        self.model.save(save)
+        self.model = PPO2(CustomPolicy, env=self.env, verbose=0, learning_rate=1e-5, tensorboard_log=save )
+        for i in range(10):
+            self.model.learn(n_timesteps)
+            self.model.save(save)
     
     
     def evaluate(self, num_env=1, num_steps=14400):
@@ -75,7 +78,7 @@ class PPO2_SB():
         env_id = "default"
         num_e = 1
         self.env = SubprocVecEnv([self.make_env(env_id, i) for i in range(num_e)])
-        self.model = PPO2.load("default", self.env, policy=CustomPolicy, tensorboard_log="./ppocnn/" )
+        self.model = PPO2.load('saves/agent.pkl', self.env, policy=CustomPolicy, tensorboard_log="./ppocnn/" )
         
 
         episode_rewards = [[0.0] for _ in range(self.env.num_envs)]

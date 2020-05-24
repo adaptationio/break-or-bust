@@ -11,6 +11,7 @@ class Player():
         self.balance = 1000
         self.reward = 0
         self.bet = False
+        self.multiply = 1
         
     def update(self, m_price):
         pass
@@ -35,12 +36,16 @@ class Player():
         x = int(x)
         if x == 0:
             self.bet = True
+            self.multiply = 1
         elif x == 1:
             self.bet = False
         elif x == 2:
-            pass
+            self.bet = True
+            self.multiple = 2
         elif x == 3:
-            pass
+            self.bet = True
+            self.multiple = 3
+            
         else:
             pass
     

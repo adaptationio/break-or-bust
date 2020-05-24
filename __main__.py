@@ -6,7 +6,8 @@ trainer = PPO2_SB()
 
 def main():
    print('test')
-   trainer.train() 
+   #trainer.train() 
+   app.run(ssl_context=('cert.pem', 'key.pem'), host='localhost')
     
     
     
