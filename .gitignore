@@ -9,3 +9,13 @@ breakorbust/common/__pycache__/__init__.cpython-36.pyc
 breakorbust/agents/__pycache__/ppo_agent_sb.cpython-35.pyc
 breakorbust/agents/__pycache__/ppo_agent_sb.cpython-36.pyc
 breakorbust/common/__pycache__/numbergen.cpython-36.pyc
+breakorbust/env/__pycache__/state.cpython-36.pyc
+__pycache__/__main__.cpython-36.pyc
+breakorbust/agents/__pycache__/policy.cpython-36.pyc
+breakorbust/api/__pycache__/apireal.cpython-36.pyc
+breakorbust/client/__pycache__/__init__.cpython-36.pyc
+breakorbust/common/__pycache__/indicators.cpython-36.pyc
+breakorbust/common/__pycache__/utilities.cpython-36.pyc
+breakorbust/env/__pycache__/__init__.cpython-36.pyc
+breakorbust/env/__pycache__/gym_template.cpython-36.pyc
+breakorbust/env/__pycache__/player.cpython-36.pyc

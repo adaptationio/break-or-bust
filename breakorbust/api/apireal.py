@@ -77,6 +77,7 @@ def predict():
         #data["prediction"] = str('moose')
         #data["success"] = True
         #data = 'itworked'
+        #state.reverse()
         state = np.array(state)
         if count == 0:
             env.live_state = state

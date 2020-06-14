@@ -30,7 +30,9 @@ class BustaBitSim():
         #NumberGen.to_array(10000000, True)
         #self.numbergen = NumberGen()
         #self.numbergen.to_array(10000000, True)
-        self.state_full = np.load('data/game10000000.npy')
+        #self.state_full = np.load('data/game10000000.npy')
+        #self.state_full []
+        print('make episode')
 
     def make_current_state(self, count):
         if self.live:
@@ -39,7 +41,7 @@ class BustaBitSim():
         else:
             start = (0+count+self.rand)
             end = (1001+count+self.rand)
-            self.state = self.state_full[start:end]
+            #self.state = self.state_full[start:end]
             
         return self.state
 
@@ -65,10 +67,10 @@ class BustaBitSim():
         self.player.balance = 0
         self.count = 0
         self.make_episode()
-        if self.eval:
-            self.rand = np.random.random_integers(len(self.state_full / 10 * 9), len(self.state_full))
-        else:
-            self.rand = np.random.random_integers(len(self.state_full / 10 * 9))
+        #if self.eval:
+            #self.rand = np.random.random_integers(len(self.state_full / 10 * 9), len(self.state_full))
+        #else:
+            #self.rand = np.random.random_integers(len(self.state_full / 10 * 9))
         self.state = self.make_current_state(self.count)
         #print(len(self.state))
         state = self.state_maker()

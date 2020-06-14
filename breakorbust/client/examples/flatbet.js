@@ -1,6 +1,6 @@
 var config = {
     wager: {
-      value: 100, type: 'balance', label: 'wager'
+      value: 700, type: 'balance', label: 'wager'
     },
     payout: {
       value: 2, type: 'multiplier', label: 'payout' }
@@ -36,24 +36,27 @@ var config = {
 
   function onGameStarted() {
     if (action == "0"){
+      config.wager.value = 700
       makeBet();
       //console.log('action 1');
     } else if (action == 0) {
+      config.wager.value = 700
       makeBet();
       console.log('actions 2');
     } else if (action == '2') {
-      config.wager.value = 200
+      config.wager.value = 1400
       makeBet();
     } else if (action == 2) {
-      config.wager.value = 200
+      config.wager.value = 1400
       makeBet();
     } else if (action == '3'){
-      config.wager.value = 300
+      config.wager.value = 2100
       makeBet();
     } else if (action == 3) {
-      config.wager.value = 300
+      config.wager.value = 2100
       makeBet();
     } else {
+      config.wager.value = 700
       log("no buy");
     }
   };
@@ -70,7 +73,7 @@ var config = {
       game_history.push(lastGame.bust);
 
     }
-    if (game_history.length > 11){
+    if (game_history.length > 1000){
       var actions = postData('https://localhost:5000/predict', { gamearray: game_history })
       .then(data => {
         console.log(data);
@@ -98,3 +101,5 @@ var config = {
     engine.bet(config.wager.value, config.payout.value);
     log('betting', Math.round(config.wager.value / 100), 'on', config.payout.value, 'x');
   }
+
+  //sujy8fo2r9
